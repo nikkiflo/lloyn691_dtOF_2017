@@ -10,37 +10,36 @@
 
 Ball::Ball(){
 
-
-    xpos = ofRandom(0, ofGetWidth());
-    ypos = ofRandom(0, ofGetHeight());
+    pos.set(ofRandom(0, ofGetWidth()), ofRandom(0, ofGetHeight()));
+    
     lastUpdate = ofGetElapsedTimef();
-
+    offset = ofRandom(0, ofGetWidth());
+    size = 3.5;
+    
 }
-void Ball::update(){
+
+
+void Ball::update(float vol){
     
-//    xpos    = ofMap( ofNoise( (ofGetElapsedTimef()-lastUpdate)/2.0, -1000), 0, 1, 0, ofGetWidth());
-//    ypos    = ofMap( ofNoise(( ofGetElapsedTimef()-lastUpdate)/2.0, 1000), 0, 1, 0, ofGetHeight());
-    
-    //xpos = ofMap( ofNoise( ofGetElapsedTimef()), 0, 1, 0, ofGetWidth());
-    
-//    xpos    = ofMap( ofNoise( ofGetElapsedTimef()/2.0, -1000), 0, 1, 0, ofGetWidth());
-//    ypos    = ofMap( ofNoise( ofGetElapsedTimef()/2.0, 1000), 0, 1, 0, ofGetHeight());
-//    
-    
-    
-    xpos = ofMap(ofSignedNoise(ofRandom(-100,100), xpos * 0.1, ofGetElapsedTimef()*0.2),-1,1,xpos - 5,xpos +5);
-    ypos = ofMap(ofSignedNoise(ofRandom(-100,100), ypos * 0.1, ofGetElapsedTimef()*0.2),-1,1,ypos -5, ypos +5);
-    //ypos = ofMap( ofNoise( ofGetElapsedTimef()), 0, 1, 0, ofGetHeight());
+    speed = vol;
+
+    pos.x = ofMap( ofNoise( ofGetElapsedTimef()*speed, -1000 + offset), 0, 1, 0, ofGetWidth());
+    pos.y = ofMap( ofNoise( ofGetElapsedTimef()*speed, 1000 + offset), 0, 1, 0, ofGetHeight());
+    con.x = pos.x;
+    con.y = pos.y;
+
 }
 
 void Ball:: applyForce(ofVec2f force){
-    xpos+=force.x;
-    ypos+=force.y;
+    
+    pos.x += force.x;
+    pos.y += force.y;
 
 }
 
 
 void Ball::draw(){
-    ofDrawCircle(xpos, ypos, 6);
+    
+    ofDrawCircle(pos.x, pos.y, size);
 
 }

@@ -16,17 +16,22 @@ public:
     
     Ball();
     ~Ball(){}
-    void update();
+    void update(float vol);
     void draw();
     void applyForce(ofVec2f force);
+    
 
 
 
     float radius;
-    float xpos;
-    float ypos;
+    ofVec3f pos;
     
     float lastUpdate;
+    float offset;
+    
+    ofVec3f con;
+    float size;
+    float speed;
     
 
 

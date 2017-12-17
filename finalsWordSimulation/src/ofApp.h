@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Ball.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -9,9 +8,6 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-        void makeConnection();
-        void checkDistance();
-        void audioIn(float * input, int bufferSize, int nChannels);
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -24,15 +20,11 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-    Ball ball;
-    vector<Ball> balls;
-    int num;
-    ofColor color;
-    
-   
-    float vol;
-    
-    ofSoundStream soundStream;
 		
+    string guilty;
+    vector<string> words;
+    ofImage person;
+    ofTrueTypeFont font;
+    
+    int nWords;
 };
